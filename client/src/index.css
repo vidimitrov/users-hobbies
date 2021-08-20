@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Nunito', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #fff;
+    background: #333;
+}
+
+.App {
+    margin: 1rem auto;
+}
+
+.App > h1 {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.Card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #444;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #333333;
+}
+
+.Card.selected {
+  background: #17aacf;
+  color: #444;
+}
+
+.Card.selected .Card--text h1 {
+  color: #444;
+}
+
+.Card--text h1 {
+  color: #17aacf;
+}
+
+.Card--button button {
+    background: #f5f6f7;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.Card--button__delete {
+    border: 1px solid #ca0000;
+    color: #ca0000;
+}
+
+.Card--button__done {
+    border: 1px solid #00aa69;
+    color: #00aa69;
+    margin-right: 1rem;
+}
+
+.Form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #444;
+  margin-bottom: 1rem;
+  background-color: #afafaf;
+}
+
+.Form > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Container {
+  display: flex;
+}
+
+.Container--leftColumn {
+  flex: 4;
+}
+
+.Container--rightColumn {
+  flex: 8;
+}
+
+.line-through {
+    text-decoration: line-through;
+    color: #777 !important;
+}
+
+.hide-button {
+    display: none;
+}
+
+.table-wrapper {
+  margin-bottom: 25px;
+  padding: 0 16px;
+  border-radius: 6px;
+  background: #333;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  display: grid;
+  overflow: hidden;
+  border-top: 3px solid #17aacf;
+  border-left: 3px solid #17aacf;
+  border-bottom: 3px solid #17aacf;
+  grid-template-columns:
+    minmax(150px, 2fr)
+    minmax(150px, 4fr);
+}
+
+table thead,
+table tbody,
+table tr {
+  display: contents;
+}
+
+table th {
+  position: relative;
+  font-size: 18px;
+}
+
+table th,
+table td {
+  text-align: left;
+  padding: 16px 20px;
+  min-width: 100px;
+}
+
+table th span,
+table td span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+}
+
+table tr td {
+  border-top: 1px solid #ccc;
+}
+
+.resize-handle {
+  display: block;
+  position: absolute;
+  cursor: col-resize;
+  width: 3px;
+  height: 450px;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  background-color: #17aacf;
+}
+
+.resize-handle:hover {
+  border-color: #ccc;
+}
+
+.resize-handle.active {
+  border-color: #517ea5;
+}
+
+.scrollable-container {
+  max-height: 200px;
+  overflow: auto;
+}
+
