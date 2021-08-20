@@ -1,0 +1,480 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "User Hobbies API",
+        "description": "A simple API for the User Hobbies web app",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Veselin Dimitrov",
+            "email": "veselin@toptal.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:4000",
+            "description": "Local server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Users API"
+        },
+        {
+            "name": "Hobbies API"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "id": {
+                "type": "string",
+                "description": "An id of a entity",
+                "example": "611e3ccf0abd408180b80aa1"
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "User identification number",
+                        "example": "611e3ccf0abd408180b80aa1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "User's name",
+                        "example": "John Doe"
+                    },
+                    "hobbies": {
+                        "type": "array",
+                        "description": "The hobbies that the user has defined",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "example": "611e3ccf0abd408180b80aa1"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "Bushcraft"
+                                },
+                                "passionLevel": {
+                                    "type": "string",
+                                    "example": "Medium"
+                                },
+                                "year": {
+                                    "type": "number",
+                                    "example": "2005"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Users": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "User identification number",
+                            "example": "611e3ccf0abd408180b80aa1"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "User's name",
+                            "example": "John Doe"
+                        },
+                        "hobbies": {
+                            "type": "array",
+                            "description": "The hobbies that the user has defined",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "passionLevel": {
+                                        "type": "string"
+                                    },
+                                    "year": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "UserInput": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "User's name",
+                        "example": "John Doe"
+                    }
+                }
+            },
+            "Hobby": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Hobby identification number",
+                        "example": "611e3ccf0abd408180b80aa1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Hobby's name",
+                        "example": "Bushcraft"
+                    },
+                    "passionLevel": {
+                        "type": "string",
+                        "description": "User's passion level of that hobby",
+                        "example": "Medium"
+                    },
+                    "year": {
+                        "type": "number",
+                        "description": "The year since the user has this hobby",
+                        "example": "2005"
+                    }
+                }
+            },
+            "Hobbies": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "Hobby identification number",
+                            "example": "611e3ccf0abd408180b80aa1"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "Hobby's name",
+                            "example": "Bushcraft"
+                        },
+                        "passionLevel": {
+                            "type": "string",
+                            "description": "User's passion level of that hobby",
+                            "example": "Medium"
+                        },
+                        "year": {
+                            "type": "number",
+                            "description": "The year since the user has this hobby",
+                            "example": "2005"
+                        }
+                    }
+                }
+            },
+            "HobbyInput": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Hobby's name",
+                        "example": "Bushcraft"
+                    },
+                    "passionLevel": {
+                        "type": "string",
+                        "description": "User's passion level of that hobby",
+                        "example": "Medium"
+                    },
+                    "year": {
+                        "type": "number",
+                        "description": "The year since the user has this hobby",
+                        "example": "2005"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/users": {
+            "summary": "Users CRUD operations",
+            "description": "The root endpoint for all CRUD operations for the users",
+            "get": {
+                "tags": ["Users API"],
+                "description": "Get users",
+                "operationId": "getUsers",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Users were fetched",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Users API"],
+                "description": "Create user",
+                "operationId": "createUser",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "summary": "Users CRUD operations",
+            "description": "The endpoint for updates and deletions of specific users",
+            "put": {
+                "tags": ["Users API"],
+                "description": "Update user",
+                "operationId": "updateUser",
+                "parameters": [{
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        },
+                        "required": true,
+                        "description": "The id of the user"
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Users API"],
+                "description": "Delete user",
+                "operationId": "deleteUser",
+                "parameters": [{
+                        "name": "userId",
+                        "in": "path",
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        },
+                        "required": true,
+                        "description": "The id of the user"
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/users/{userId}/hobbies": {
+            "summary": "Hobbies CRUD operations",
+            "description": "The root endpoint for all CRUD operations for the hobbies",
+            "get": {
+                "tags": ["Hobbies API"],
+                "description": "Get hobbies",
+                "operationId": "getHobbies",
+                "parameters": [{
+                        "name": "userId",
+                        "in": "path",
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        },
+                        "required": true,
+                        "description": "The id of the user"
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Hobbies were fetched",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hobbies"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Hobbies API"],
+                "description": "Create hobby",
+                "operationId": "createHobby",
+                "parameters": [{
+                        "name": "userId",
+                        "in": "path",
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        },
+                        "required": true,
+                        "description": "The id of the user"
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HobbyInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Hobby created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hobby"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/users/{userId}/hobbies/{id}": {
+            "summary": "Hobbies CRUD operations",
+            "description": "The endpoint for updates and deletions of specific hobbies",
+            "put": {
+                "tags": ["Hobbies API"],
+                "description": "Update hobby",
+                "operationId": "updateHobby",
+                "parameters": [{
+                        "name": "userId",
+                        "in": "path",
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        },
+                        "required": true,
+                        "description": "The id of the user"
+                    }, {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        },
+                        "required": true,
+                        "description": "The id of the hobby"
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HobbyInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Hobby updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hobby"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Hobbies API"],
+                "description": "Delete hobby",
+                "operationId": "deleteHobby",
+                "parameters": [{
+                        "name": "userId",
+                        "in": "path",
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        },
+                        "required": true,
+                        "description": "The id of the user"
+                    }, {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        },
+                        "required": true,
+                        "description": "The id of the hobby"
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Hobby deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hobby"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    }
+}
